@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:onnfood/models/product.dart';
 import 'package:onnfood/widgets/product_item.dart';
+import 'package:onnfood/widgets/slider.dart';
+
+import '../widgets/titles.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -43,26 +46,69 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
     ),
+    Product(
+      id: 'p4',
+      title: 'A Pan',
+      description: 'Prepare any meal you want.',
+      price: 49.99,
+      imageUrl:
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
+    ),
+    Product(
+      id: 'p4',
+      title: 'A Pan',
+      description: 'Prepare any meal you want.',
+      price: 49.99,
+      imageUrl:
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          // backgroundColor: Colors.white,
-          title: const Text('Home'),
-          actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.person))
-          ],
-        ),
-        body: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: productList.length,
-            itemBuilder: ((context, index) => ProductItem(
-                  id: productList[index].id,
-                  title: productList[index].title,
-                  imageUrl: productList[index].imageUrl,
-                  price: productList[index].price,
-                ))));
+    const EdgeInsets _symmetricPadding = EdgeInsets.symmetric(horizontal: 20.0);
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(
+            // backgroundColor: Colors.white,
+            title: const Text('Home'),
+            actions: [
+              IconButton(onPressed: () {}, icon: const Icon(Icons.person))
+            ],
+          ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SliderWidget(),
+              const Titles(
+                symmetricPadding: _symmetricPadding,
+                text: 'Top Picks',
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              SizedBox(
+                height: 150,
+                width: double.infinity,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: productList.length,
+                    itemBuilder: ((context, index) => ProductItem(
+                          id: productList[index].id,
+                          title: productList[index].title,
+                          imageUrl: productList[index].imageUrl,
+                          price: productList[index].price,
+                        ))),
+              ),
+              const Titles(
+                symmetricPadding: _symmetricPadding,
+                text: 'Liquors',
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+            ],
+          )),
+    );
   }
 }
