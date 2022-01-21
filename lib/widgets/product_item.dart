@@ -27,7 +27,15 @@ class ProductItem extends StatelessWidget {
             )
           ],
         ),
-        Text(title),
+        SizedBox(
+          width: 100,
+          child: Text(
+            title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            softWrap: true,
+          ),
+        ),
         Text(
           price.toString(),
           style: const TextStyle(decoration: TextDecoration.lineThrough),

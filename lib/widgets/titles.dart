@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Titles extends StatelessWidget {
   final String text;
+  final String id;
   const Titles({
     Key? key,
     required EdgeInsets symmetricPadding,
     required this.text,
+    required this.id,
   })  : _symmetricPadding = symmetricPadding,
         super(key: key);
 
   final EdgeInsets _symmetricPadding;
+
+  saveCategoryId() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.setString('catId', id);
+  }
 
   @override
   Widget build(BuildContext context) {
